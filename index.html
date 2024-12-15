@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Portfolio</title>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> 
+    <!-- Chart.js for creating charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeIn 1.5s ease-out;
+            width: 100vw;
+            height:100vh;       }
+
+        /* Animation for page load */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+ header {
+    background-color: rgba(0, 0, 22, 0.9);
+    color: #4ca1af;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    top: 0; /* في أعلى الصفحة */
+    
+    
+    z-index: 100;
+    position: fixed;
+    overflow:visible;
+    animation: slideDown 0.8s ease-out;
+}
+
+
+        /* Animation for header */
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color:#4ca1af;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #ff6f61;
+        }
+
+        main {
+        	margin-top:40px;
+           max-width: 1200px;
+            width: 90%;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Animation for main content */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typing effect */
+        .typing {
+            font-size: 2rem;
+            display: inline-block;
+           
+            padding:0px;
+            white-space: nowrap;
+            overflow: hidden;
+           
+            
+           
+        }
+
+        /* Typing animation 
+
+        /* Blinking cursor effect */
+        @keyframes blinkCaret {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        img.profile {
+            border-radius: 50%;
+            width: 250px;
+            height: 250px;
+            border: 3px solid white;
+            margin: 20px auto;
+        }
+
+        .skills, .projects, .testimonials, .charts {
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .skills ul, .projects ul, .testimonials ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .skills li, .projects li, .testimonials li {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        /* Animation for skills/projects/testimonials */
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .projects img.project-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 22, 0.9);
+            padding: 0px;
+            text-align: center;
+            width:100% ;
+            font-size:0.8rem ;
+padding:5px;    }
+
+        footer a {
+            color: #4ca1af;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin: 20px;
+            display:flex;       }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ff6f61;
+        }
+
+        button {
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4b3e;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            header nav a {
+                font-size: 1rem;
+            }
+
+            img.profile {
+                width: 150px;
+                height: 150px;
+            }
+
+            .skills li, .projects li, .testimonials li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .skills li i, .projects li i, .testimonials li i {
+                margin-bottom: 5px;
+            }
+
+            main {
+                padding: 10px;
+            }
+
+            .projects img.project-img {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header nav a {
+                font-size: 0.9rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 15px;
+                font-size: 0.5rem;
+            }
+        }
+
+        /* Initially hide the chart */
+        #completionChart {
+            opacity: 0;
+            
+            transition: opacity 1s ease-out;
+            
+        }
+        /* Styling for contact section */
+#contact {
+    margin: 40px 0;
+    text-align: center;
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    
+}
+.projects .project-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: thin;
+        }
+
+        .projects .project-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .projects .project-container::-webkit-scrollbar-thumb {
+            background-color: #4ca1af;
+            border-radius: 4px;
+        }
+
+        .projects .project {
+            flex: 0 0 auto;
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+#contact h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#contact p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-links {
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: block;
+    margin: 10px 20px;
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #ff6f61;
+}
+
+button {
+    background-color:rgba(255,255,255,0.10);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color:rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+    .social-links a {
+        font-size: 1rem;
+    }
+    button {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+#completionChart {
+        height: 400px !important; /* زيادة الارتفاع */
+    }
+@media (max-width: 768px) {
+    #completionChart {
+        height: 300px !important; /* زيادة الارتفاع */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <section id="about" style="background-image: url('project2.jpg'); background-size: cover; background-position: center; padding: 50px 20px; text-align: center; color: white;width:100%;
+animation: fadeInUp 1s ease-out;
+ @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+">
+    <div style="display:flex;max-width: 800px; margin: auto; background-color: rgba(0, 0, 22, 0.7); padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);flex-flow:column;">
+        
+        
+        <img class="profile" src="./T.jpg" alt="Profile Picture">
+        <h1 class="typing">Mr.OSKAR</h1>
+        <p style="font-size: 1.2rem; line-height: 1.6; margin-top: 15px;">
+            I am an AI Engineer with a passion for machine learning, deep learning, and building intelligent systems.
+        </p>
+    </div>
+</section>
+
+    <main>
+    	
+        <section id="skills" class="skills">
+        	
+           <h2>Skills :</h2>
+            <hr style ="width :100%; margin-top:15px;">
+            <ul>
+                <li><i class="bi bi-code"> </i>  Programming Languages: Python, JavaScript, C++, Java, SQL, PHP</li>
+                <li><i class="bi bi-brain"> </i> Machine Learning and Deep Learning</li>
+                <li><i class="bi bi-graph-up">  </i> Data Analysis and Visualization</li>
+                <li><i class="bi bi-cloud"> </i> Cloud Computing and Deployment</li>
+            </ul>
+        </section>
+
+    <section id="projects" class="projects">
+    <h2>Projects :</h2>
+     <hr style ="width :100%; margin-top:15px;">
+    <ul>
+        <li>
+        	<img class="project-img" src="./project2.jpg" alt="AI Chatbot Project">
+        <div style="padding:0px 20px;">
+            <strong>PyQt5 Calculator:</strong><p> Create a Calculator Using PyQt5
+            <br>
+            
+            <br>
+            <button onclick="window.location.href = 'page.html';">Read More</button>
+            </div>
+        </li>
+        <li>
+        	<img class="project-img" src="./project2.jpg" alt="AI Chatbot Project">
+        <div style="padding:0px 20px;">
+       <strong>Image Classifier:</strong><p> A deep learning model for image recognition.
+            <br>
+            
+            <br>
+                  <button onclick="alert('More details about the Image Classifier')">Read More</button>
+            </div>
+        </li>
+        <li>
+        	<img class="project-img" src="./project2.jpg" alt="AI Chatbot Project">
+        <div style="padding:0px 20px;">
+            <strong>AI Chatbot:</strong><p> A conversational bot for customer support.
+            <br>
+            
+            <br>
+            <button onclick="alert('More details about the AI Chatbot')">Read More</button>
+            </div>
+        </li>
+   
+    </ul>
+</section>
+<section id="projects" class="projects">
+            <h2>Services :</h2>
+            <div class="project-container">
+                <div class="project">
+                    <h3>AI Chatbot</h3>
+                    <img class="project-img" src="project2.jpg" alt="AI Chatbot Project">
+                    <p>A conversational bot for customer support.</p>
+                </div>
+                <div class="project">
+                    <h3>Image Classifier</h3>
+                    <img class="project-img" src="project2.jpg" alt="Image Classifier Project">
+                    <p>A deep learning model for image recognition.</p>
+                </div>
+                <div class="project">
+                    <h3>Recommendation System</h3>
+                    <img class="project-img" src="project2.jpg" alt="Recommendation System Project">
+                    <p>A system to recommend movies to users.</p>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="charts" class="charts" >
+            <h2>Project Completion Speed (Non-linear Chart)</h2>
+            
+            	 <hr style ="width :100%; margin-top:15px;">
+            <canvas id="completionChart"></canvas>
+        </section>
+
+      <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    
+    <p>Email: <a href="mailto:oskar1python@gmail.com" style="color: #58ffe3; font-weight: 100; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">oskar1python@gmail.com</a></p>
+    <p><i class="bi bi-telephone"></i> +967773957426</p>
+    <div class="contact-info">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/%D8%A7%D8%A8%D8%AF%D8%A7%D8%B9-for-you-783579304?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" title="GitHub"><i class="bi bi-github"></i></a>
+            <a href="https://www.instagram.com/oskar.1k" title="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=+967773957426" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://t.me/oskar_go" title="Telegram"><i class="bi bi-telegram"></i></a>
+        </div>
+        <button onclick="alert('Thank you for reaching out!')">Send a Message</button>
+    </div>
+</section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AI Engineer Mr.OSKAR</p>
+    </footer>
+
+    <script>
+        // Trigger chart animation when it is in the viewport
+        const chart = document.getElementById('completionChart');
+        const chartObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    chart.style.opacity = 1;
+                    createChart();
+                    chartObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        chartObserver.observe(chart);
+
+        function createChart() {
+    const ctx = chart.getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+                label: 'Completion Speed (Days)',
+                data: [30, 18, 20, 10, 8, 12, 5], 
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // يسمح بتغيير نسبة العرض إلى الارتفاع
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Project Completion Speed Over Months',
+                    color: 'white',
+                    font: {
+                        size: 16
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Month',
+                        color: 'white'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Days',
+                        color: 'white'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+    </script>
+</body>
+</html>

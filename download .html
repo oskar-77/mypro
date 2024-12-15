@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح وتنزيل ملف</title>
+    <!-- إضافة مكتبة Prism.js -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js"></script>
+    <!-- إضافة Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: #ed5700;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+          #video-container{
+          	display:flex;
+            width:100%;
+        	
+           
+            border-radius: 2rem;
+            
+           
+}
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .code-container {
+            position: relative;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        pre[class*="language-"] {
+            margin: 0;
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            background: #272822;
+            color: #f8f8f2;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color:  #61dafb;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-button:hover {
+            background: #21a1f1;
+        }
+
+        .download-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar-inner {
+            height: 20px;
+            width: 0%;
+            background-color: #4caf50;
+            transition: width 0.2s ease;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* تصميم النافذة المنبثقة */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+        }
+
+        .modal h3 {
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-buttons .confirm {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .modal-buttons .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+    	<div id="video-container" style="margin-top: 20px;">
+        <!-- هنا سيظهر الفيديو بعد تحويل الرابط -->
+    </div>
+    	<h1>مرحبًا بكم في صفحة الشرح</h1>
+        <h2>ما هو ملف Python؟</h2>
+        <p>ملف Python يحتوي على كود برمجي يُكتب بلغة البرمجة Python. يتم استخدامه لتطوير تطبيقات وبرامج تعمل على أجهزة الكمبيوتر أو الهواتف.</p>
+
+        <h2>مثال على كيفية استخدام ملف Python</h2>
+        <p>يمكنك كتابة كود Python بسيط لإنشاء تطبيق مثل آلة حاسبة أو أداة تحليل بيانات. هذا الملف الذي يمكنك تنزيله يحتوي على مثال بسيط لكود Python.</p>
+        <img src="https://via.placeholder.com/800x400" alt="مثال على كود Python">
+
+        <h2>كيفية تنزيل الملف</h2>
+        <p>اضغط على الزر أدناه لتنزيل ملف Python الخاص بنا. عند النقر على الزر، سيتم تحضير الملف، وستظهر لك رسالة لتأكيد التنزيل. بعد التأكيد، سيتم تنزيل الملف مباشرة على جهازك.</p>
+
+        <h1>مرحبًا بكم في صفحة الشرح</h1>
+        <h2>مثال على كود Python</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('python-code')"><i class="bi bi-copy"></i></button>
+            <pre class="language-python" id="python-code">
+<code>
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")
+</code>
+            </pre>
+        </div>
+
+        <h2>مثال على كود CMD</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode('cmd-code')"><i class="bi bi-copy"></i></button>
+            <pre class="language-batch" id="cmd-code">
+<code>
+@echo off
+echo مرحباً بك في CMD
+pause
+</code>
+            </pre>
+        </div>
+
+        <h2>كيفية تنزيل الملف</h2>
+        <div class="download-section">
+        	
+            <button id="download-btn" onclick="prepareDownload()">تحميل الملف</button>
+             <div class="message" id="status-message"></div>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-bar-inner" id="progress-bar-inner"></div>
+                
+            </div>
+           <p><p><p><p>
+        </div>
+        <div style="width :100%;height:6rem;">
+    	
+    	</div>
+    </div>
+    
+
+    <!-- النافذة المنبثقة للتأكيد -->
+    <!-- النافذة المنبثقة للتأكيد -->
+<div class="modal" id="confirm-modal">
+    <div class="modal-content">
+        <h3>تأكيد التنزيل</h3>
+        <p>اسم الملف: <strong>جاري الحساب...</strong></p>
+        <div class="modal-buttons">
+            <button class="confirm" onclick="downloadFile()">تنزيل</button>
+            <button class="cancel" onclick="closeModal()">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const code = codeElement.innerText;
+
+            navigator.clipboard.writeText(code).then(() => {
+                alert("تم نسخ الكود إلى الحافظة!");
+            }).catch(err => {
+                console.error("فشل في نسخ الكود: ", err);
+            });
+        }
+
+        function prepareDownload() {
+            const statusMessage = document.getElementById("status-message");
+            const progressBar = document.getElementById("progress-bar");
+            const progressBarInner = document.getElementById("progress-bar-inner");
+
+            statusMessage.textContent = "جاري تحضير الملف...";
+            statusMessage.style.color = "#333";
+            progressBar.style.display = "block";
+            progressBarInner.style.width = "0%";
+
+            let progress = 0;
+
+            const interval = setInterval(() => {
+                progress += 3;
+                progressBarInner.style.width = progress + "%";
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    showModal();
+                }
+            }, 100);
+        }
+
+        function showModal() {
+    const modal = document.getElementById("confirm-modal");
+    const fileNameElement = modal.querySelector("strong");
+
+    // اسم الملف
+    const fileName = "h.py";
+
+    // إنشاء Blob لحساب حجم الملف
+    fetch(fileName).then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch the file");
+        }
+        return response.blob();
+    }).then(blob => {
+        const fileSize = (blob.size / 1024).toFixed(2); // تحويل الحجم إلى كيلوبايت
+        fileNameElement.textContent = `${fileName} (${fileSize} KB)`;
+        modal.classList.add("active");
+    }).catch(error => {
+        console.error("Error fetching the file:", error);
+        fileNameElement.textContent = `${fileName} (تعذر تحديد الحجم)`;
+        modal.classList.add("active");
+    });
+}
+
+        function closeModal() {
+            const modal = document.getElementById("confirm-modal");
+            modal.classList.remove("active");
+            const statusMessage = document.getElementById("status-message");
+            statusMessage.textContent = "تم إلغاء التنزيل.";
+            statusMessage.style.color = "red";
+        }
+
+        function downloadFile() {
+            const modal = document.getElementById("confirm-modal");
+            const statusMessage = document.getElementById("status-message");
+
+            modal.classList.remove("active");
+
+            const fileName = "h.py";
+
+            const link = document.createElement("a");
+            link.href = fileName;
+            link.download = fileName;
+
+            link.click();
+
+            statusMessage.textContent = "تم تنزيل الملف بنجاح!";
+            statusMessage.style.color = "green";
+        }
+        
+        
+        
+        
+        
+    function embedYouTubeVideo() {
+            // الحصول على الرابط المدخل
+            const link = "https://youtu.be/eGtog2M8y5g?si=MDMQ9Dmcn4SdPa9T";
+
+            // التحقق من أن الرابط يحتوي على جزء "v=" وهو الجزء الذي يحتوي على ID الفيديو
+            const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = link.match(regex);
+
+            if (match) {
+                // استخراج ID الفيديو
+                const videoId = match[1];
+
+                // إنشاء رابط صالح لعرض الفيديو في iframe
+                const iframeHtml = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+                // إضافة iframe إلى الحاوية
+                document.getElementById("video-container").innerHTML = iframeHtml;
+            } else {
+                // عرض رسالة خطأ إذا كان الرابط غير صالح
+                document.getElementById("video-container").innerHTML = "<p>يرجى إدخال رابط YouTube صالح.</p>";
+            }
+        }
+        embedYouTubeVideo()
+        
+        
+        
+
+    </script>
+
+</body>
+</html>
